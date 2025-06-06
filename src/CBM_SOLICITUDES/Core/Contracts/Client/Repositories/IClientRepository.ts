@@ -8,4 +8,8 @@ export default class IClientRepository {
     async createClient(cliente: ClientModel): Promise<void> {
         throw new Error('Método no implementado');
     }
+
+    async getClientByCode(code: string): Promise<boolean> {
+        throw new Error('Método no implementado');
+    }
 }

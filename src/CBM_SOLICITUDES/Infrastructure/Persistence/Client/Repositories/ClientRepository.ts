@@ -21,4 +21,15 @@ export default class ClientRepository extends IClientRepository {
 
         await executeStoredProcedure('cliente_insert', parameters);
     }
+
+    async getClientByCode(code: string): Promise<boolean> {
+        const parameters = [
+            { name: 'codigo_cliente', value: code },
+        ];
+
+        const result = await executeStoredProcedure('cliente_select_by_code', parameters);
+
+        return result[0]?.exists === 1;
+    }
+
 }
