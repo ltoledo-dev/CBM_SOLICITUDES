@@ -17,7 +17,7 @@ export const createClient = async (req: Request, res: Response) => {
     try {
         const clientDto = { ...req.body };
         const clientRepository = new ClientRepository();
-        await CreateClient.CreateClients(clientRepository, clientDto);
+        await CreateClient.createClients(clientRepository, clientDto);
         res.status(204).json();
     } catch (error: any) {
         res.status(error.status || 500).json({ message: 'Error al crear el cliente', error: error.message });

@@ -12,7 +12,7 @@ export const mapClientModelsToClientResponseDTOs = (clients: ClientModel[]): Cli
 
 export const mapClientCreateDtoToClientModel = (client: ClientCreateDTO): ClientModel => {
     return new ClientModel({
-        idCliente: 0, // Valor por defecto para nuevos clientes
+        idCliente: 0,
         codigoCliente: client.codigoCliente,
         nombreCliente: client.nombreCliente,
     });

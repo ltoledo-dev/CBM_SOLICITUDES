@@ -1,4 +1,3 @@
-import IClientRepository from '../../../Contracts/Client/Repositories/IClientRepository';
 import {HttpError} from "../../../Domain/Exceptions/HttpError";
 import ClientRepository from "../../../../Infrastructure/Persistence/Client/Repositories/ClientRepository";
 

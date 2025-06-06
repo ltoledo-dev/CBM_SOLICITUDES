@@ -3,7 +3,7 @@ import {ClientCreateDTO} from "../../../Domain/Client/DTOs/ClienCreateDto";
 import { mapClientCreateDtoToClientModel } from '../Mappers/ClientMapper';
 import * as clientValidator from '../Validators/ClientValidator'
 
-export const CreateClients = async (clientRepository: IClientRepository, clientCreateDto: ClientCreateDTO ) => {
+export const createClients = async (clientRepository: IClientRepository, clientCreateDto: ClientCreateDTO ) => {
 
     // validamos que el cliente no exista
     await clientValidator.validateClientByCode(clientCreateDto.codigoCliente)
