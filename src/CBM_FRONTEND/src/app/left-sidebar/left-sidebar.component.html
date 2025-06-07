@@ -1,0 +1,52 @@
+
+<mat-toolbar>
+     <h4 class="name" style="margin-right: 1rem; margin-top: -4px; font-size: 1rem; max-height: 20px;">Administrador</h4>
+      <i class="fa fa-sign-out fa-lg" (click)="toggleCollapse()"></i>
+</mat-toolbar>
+
+<div
+  class="sidenav"
+  [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''"
+>
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="fal fa-bars"></i>
+    </button>
+    @if (!isLeftSidebarCollapsed()) {
+      <div class="logo-text">CBM</div>
+    }
+  </div>
+  <div class="sidenav-nav">
+
+    @if (!isLeftSidebarCollapsed()) {
+    <img
+      class="avatar mat-elevation-z8"
+      src="https://media.licdn.com/dms/image/D4E0BAQFE7wB_5Mjeaw/company-logo_200_200/0/1714412526352/corbumacorpcr_logo?e=2147483647&v=beta&t=Y3jxTU6Ck5AjKfTZSSgpLH8RoK3eKgzmw_ay0y2A6Uw"/>
+
+    <h4 class="name">Administrador</h4>
+    <p class="designation">Luis Fernando Toledo Rodríguez</p>
+
+    <mat-divider></mat-divider>
+    }
+
+    @for (item of items; track $index) {
+      <li class="sidenav-nav-item">
+        <a
+          class="sidenav-nav-link"
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="item.icon"></i>
+          @if (!isLeftSidebarCollapsed()) {
+            <span class="sidenav-link-text">{{ item.label }}</span>
+          }
+        </a>
+      </li>
+    }
+  </div>
+</div>
+
+<mat-toolbar color="primary" class="footer">
+  <span>© 2025 Corbuma Corp. | v1.0.0.2506</span>
+</mat-toolbar>
