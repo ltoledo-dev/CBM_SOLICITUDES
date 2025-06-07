@@ -6,6 +6,7 @@ import { exceptionMiddleware } from './Presentation/WebApi/Middleware/ExceptionM
 import clientRoutes from './Presentation/WebApi/Functionalities/Client/Routes/ClientRoutes';
 import productRoutes from "./Presentation/WebApi/Functionalities/Product/Routes/ProductRoutes";
 import requestRoutes from "./Presentation/WebApi/Functionalities/Request/Routes/RequestRoutes";
+import authenticationRoutes from "./Presentation/WebApi/Functionalities/Authentication/Routes/AuthenticationRoutes";
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/api/v1', authenticationRoutes);
 app.use('/api/v1', clientRoutes);
 app.use('/api/v1', productRoutes);
 app.use('/api/v1', requestRoutes);
