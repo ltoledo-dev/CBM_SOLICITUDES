@@ -25,6 +25,12 @@
     }
   </mat-form-field>
 </form>
+
+  @if(errorMsg) {
+    <div style="color: red; margin-top: 10px;">
+      {{ errorMsg }}
+    </div>
+  }
 </mat-dialog-content>
 
 
@@ -33,8 +39,8 @@
         <mat-icon>close</mat-icon>
         Cancelar
     </button>
-    <button mat-fab extended>
-        <mat-icon>save</mat-icon>
-        Guardar
-    </button>
+  <button mat-fab extended (click)="guardarCliente()" [disabled]="codeFormControl.invalid || nameFormControl.invalid">
+    <mat-icon>save</mat-icon>
+    Guardar
+  </button>
 </mat-dialog-actions>

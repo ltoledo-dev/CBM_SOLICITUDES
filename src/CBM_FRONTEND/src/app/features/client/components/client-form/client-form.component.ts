@@ -7,8 +7,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
-import { ClientModalComponent } from '../../../../components/client-modal/client-modal.component';
-import { ClientService } from '../../services/client.service';
+import { ClientModalComponent } from '../client-modal/client-modal.component';
+import { ClientService } from '../../Services/client.service';
 import { Cliente } from '../../Models/clientModel';
 import { OnInit } from '@angular/core';
 
@@ -49,7 +49,14 @@ export class ClientFormComponent implements OnInit, AfterViewInit {
   }
 
   openClientModal() {
-    this.dialog.open(ClientModalComponent);
+    const dialogRef = this.dialog.open(ClientModalComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.clienteService.obtenerClientes().subscribe(clientes => {
+          this.dataSource.data = clientes;
+        });
+      }
+    });
   }
 
   applyFilter(event: Event) {

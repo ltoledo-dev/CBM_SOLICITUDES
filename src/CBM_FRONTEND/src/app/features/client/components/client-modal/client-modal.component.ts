@@ -13,6 +13,9 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ClientService } from '../../Services/client.service';
+import { ClientCreateDto } from '../../Dtos/ClientCreateDto';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -32,4 +35,31 @@ export class ClientModalComponent {
   codeFormControl = new FormControl('', [Validators.required]);
   nameFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
+  errorMsg: string | null = null;
+
+  constructor(
+    private clientService: ClientService,
+    private dialogRef: MatDialogRef<ClientModalComponent>
+  ) {}
+
+  guardarCliente() {
+    if (this.codeFormControl.invalid || this.nameFormControl.invalid) return;
+
+    const cliente: ClientCreateDto = {
+      codigoCliente: this.codeFormControl.value!,
+      nombreCliente: this.nameFormControl.value!
+    };
+
+    this.errorMsg = null;
+    this.clientService.crearCliente(cliente).subscribe({
+      next: () => this.dialogRef.close(true),
+      error: (err) => {
+        if (err.status === 409) {
+          this.errorMsg = 'El código de cliente ya está creado.';
+        } else {
+          this.errorMsg = 'Ocurrió un error al crear el cliente.';
+        }
+      }
+    });
+  }
 }
