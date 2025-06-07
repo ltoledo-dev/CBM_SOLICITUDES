@@ -2,9 +2,11 @@ import express, { Request, Response } from 'express';
 import config from './Infrastructure/Infrastructure/Config/Config';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { exceptionMiddleware } from './Presentation/WebApi/Middleware/ExceptionMiddleware';
 import clientRoutes from './Presentation/WebApi/Functionalities/Client/Routes/ClientRoutes';
-import { exceptionMiddleware } from './Presentation/WebApi/Middleware/ExceptionMiddleware'
 import productRoutes from "./Presentation/WebApi/Functionalities/Product/Routes/ProductRoutes";
+import requestRoutes from "./Presentation/WebApi/Functionalities/Request/Routes/RequestRoutes";
+
 
 const app = express();
 
@@ -14,6 +16,7 @@ app.use(bodyParser.json());
 
 app.use('/api/v1', clientRoutes);
 app.use('/api/v1', productRoutes);
+app.use('/api/v1', requestRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.status(200).send('Bienvenido a la API');
