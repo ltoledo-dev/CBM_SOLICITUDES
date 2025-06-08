@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SolicitudGetDto } from '../Dtos/SolicitudGetDto';
 import { Solicitud } from '../Models/SolicitudModel';
+import { SolicitudCreateDto } from '../Dtos/SolicitudCreateDto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +42,9 @@ export class PurchaseRequestService {
 
   actualizarEstadoSolicitud(dto: { idSolicitudEncabezado: number; idEstado: number }): Observable<any> {
     return this.http.put(`${this.apiUrl}/v1/solicitudes`, dto);
+  }
+
+  crearSolicitud(solicitud: SolicitudCreateDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/v1/solicitudes`, solicitud);
   }
 }
