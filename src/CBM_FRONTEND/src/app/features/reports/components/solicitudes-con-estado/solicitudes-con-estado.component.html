@@ -1,0 +1,37 @@
+<div class="row">
+  <h2>Reporte de solicitudes con estado</h2>
+  <p>Consulta el estado de las solicitudes.</p>
+</div>
+
+<div class="mat-elevation-z8" style="margin-top: 20px;">
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese el valor a buscar" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="full-width-table">
+
+    <!-- Código Solicitud -->
+    <ng-container matColumnDef="codigoSolicitud">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Código de solicitud </th>
+      <td mat-cell *matCellDef="let row"> {{row.codigoSolicitud}} </td>
+    </ng-container>
+
+    <!-- Descripción Estado -->
+    <ng-container matColumnDef="descripcionEstado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+      <td mat-cell *matCellDef="let row"> {{row.descripcionEstado}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="2">
+        No se encontró información para "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Selector de página"></mat-paginator>
+</div>

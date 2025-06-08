@@ -37,6 +37,34 @@ export class LeftSidebarComponent {
     },
   ];
 
+  itemsReport = [
+    {
+      routeLink: 'ClientesConSolicitudes',
+      icon: 'fal fa-user-friends',
+      label: 'Clientes con solicitudes',
+    },
+    {
+      routeLink: 'ClientesConTotalProductos',
+      icon: 'fa fa-address-book',
+      label: 'Total productos por cliente',
+    },
+    {
+      routeLink: 'ProductosConFechasIngreso',
+      icon: 'fa fa-calendar-plus',
+      label: 'Productos con fechas de ingreso',
+    },
+    {
+      routeLink: 'SolicitudesPorDia',
+      icon: 'fa fa-calendar',
+      label: 'Solicitudes por día',
+    },
+    {
+      routeLink: 'SolicitudesConEstado',
+      icon: 'fa fa-check-square',
+      label: 'Solicitudes con estado',
+    },
+  ];
+
   toggleCollapse(): void {
     this.changeIsLeftSidebarCollapsed.emit(!this.isLeftSidebarCollapsed());
   }

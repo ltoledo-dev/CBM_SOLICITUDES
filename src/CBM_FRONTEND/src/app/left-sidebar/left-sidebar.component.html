@@ -1,7 +1,6 @@
-
 <mat-toolbar>
-     <h4 class="name" style="margin-right: 1rem; margin-top: -4px; font-size: 1rem; max-height: 20px;">Administrador</h4>
-      <i class="fa fa-sign-out fa-lg" (click)="logout()"></i>
+  <h4 class="name" style="margin-right: 1rem; margin-top: -4px; font-size: 1rem; max-height: 20px;">Administrador</h4>
+  <i class="fa fa-sign-out fa-lg" (click)="logout()"></i>
 </mat-toolbar>
 
 <div
@@ -19,17 +18,20 @@
   <div class="sidenav-nav">
 
     @if (!isLeftSidebarCollapsed()) {
-    <img
-      class="avatar mat-elevation-z8"
-      src="https://media.licdn.com/dms/image/D4E0BAQFE7wB_5Mjeaw/company-logo_200_200/0/1714412526352/corbumacorpcr_logo?e=2147483647&v=beta&t=Y3jxTU6Ck5AjKfTZSSgpLH8RoK3eKgzmw_ay0y2A6Uw"/>
+      <img
+        class="avatar mat-elevation-z8"
+        src="https://media.licdn.com/dms/image/D4E0BAQFE7wB_5Mjeaw/company-logo_200_200/0/1714412526352/corbumacorpcr_logo?e=2147483647&v=beta&t=Y3jxTU6Ck5AjKfTZSSgpLH8RoK3eKgzmw_ay0y2A6Uw"/>
 
-    <h4 class="name">Administrador</h4>
-    <p class="designation">Luis Fernando Toledo Rodríguez</p>
+      <h4 class="name">Administrador</h4>
+      <p class="designation">Luis Fernando Toledo Rodríguez</p>
 
-    <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
     }
 
-    <p style="align-self: flex-start; color: white; font-size: 16px"> - Operaciones</p>
+
+      <p style="align-self: flex-start; color: white; font-size: 16px"> @if (!isLeftSidebarCollapsed()) { Operaciones } </p>
+
+
     @for (item of items; track $index) {
       <li class="sidenav-nav-item">
         <a
@@ -46,7 +48,25 @@
       </li>
     }
 
-    <p style="align-self: flex-start; color: white; font-size: 16px"> - Reportes</p>
+      <p style="align-self: flex-start; color: white; font-size: 16px"> @if (!isLeftSidebarCollapsed()) { Reportes } </p>
+
+
+    @for (item of itemsReport; track $index) {
+      <li class="sidenav-nav-item">
+        <a
+          class="sidenav-nav-link"
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="item.icon"></i>
+          @if (!isLeftSidebarCollapsed()) {
+            <span class="sidenav-link-text">{{ item.label }}</span>
+          }
+        </a>
+      </li>
+    }
+
   </div>
 </div>
 
