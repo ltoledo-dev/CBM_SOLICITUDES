@@ -25,3 +25,90 @@ VALUES
   ('CL008', 'Super Bodega Central'),
   ('CL009', 'Despensa Familiar Mixco'),
   ('CL010', 'Tienda El Progreso');
+
+  USE [CBM_SOLICITUDES_INGRESO]
+GO
+SET IDENTITY_INSERT [dbo].[estado] ON 
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (2, N'Aprobada')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (8, N'Cancelada')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (6, N'Cerrada')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (3, N'En proceso de compra')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (1, N'Pendiente de aprobación')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (7, N'Rechazada')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (5, N'Recibida completamente')
+GO
+INSERT [dbo].[estado] ([id_estado], [descripcion]) VALUES (4, N'Recibida parcialmente')
+GO
+SET IDENTITY_INSERT [dbo].[estado] OFF
+GO
+
+
+DECLARE @i INT = 1;
+DECLARE @fechaBase DATE = '2025-06-08';
+DECLARE @diasRestar INT;
+DECLARE @idSolicitud INT;
+DECLARE @detalles INT;
+DECLARE @j INT;
+DECLARE @idProducto INT;
+DECLARE @cantidad INT;
+DECLARE @costo DECIMAL(10,2);
+
+WHILE @i <= 10
+BEGIN
+    -- Restar entre 0 y 30 días a la fecha base
+    SET @diasRestar = FLOOR(RAND() * 30);
+    
+    -- Insertar encabezado
+    INSERT INTO [CBM_SOLICITUDES_INGRESO].[dbo].[solicitud_encabezado] (
+        codigo_solicitud,
+        fecha_creacion,
+        id_cliente,
+        id_estado,
+        fecha_actualizacion,
+        id_usuario
+    ) VALUES (
+        CONCAT('SOL-', FORMAT(GETDATE(), 'yyyyMMdd'), '-', @i),
+        DATEADD(DAY, -@diasRestar, @fechaBase),
+        FLOOR(RAND() * 10) + 1,  -- id_cliente entre 1 y 10
+        1,                       -- id_estado
+        GETDATE(),
+        1                        -- id_usuario
+    );
+
+    -- Obtener el ID insertado
+    SET @idSolicitud = SCOPE_IDENTITY();
+
+    -- Insertar entre 1 y 10 detalles para este encabezado
+    SET @detalles = FLOOR(RAND() * 10) + 1;
+    SET @j = 1;
+
+    WHILE @j <= @detalles
+    BEGIN
+        SET @idProducto = FLOOR(RAND() * 10) + 1;
+        SET @cantidad = FLOOR(RAND() * 10) + 1;
+        SET @costo = CAST(RAND() * 100 + 1 AS DECIMAL(10,2));
+
+        INSERT INTO [CBM_SOLICITUDES_INGRESO].[dbo].[solicitud_detalle] (
+            id_solicitud_encabezado,
+            id_producto,
+            cantidad,
+            costo
+        ) VALUES (
+            @idSolicitud,
+            @idProducto,
+            @cantidad,
+            @costo
+        );
+
+        SET @j = @j + 1;
+    END
+
+    SET @i = @i + 1;
+END
