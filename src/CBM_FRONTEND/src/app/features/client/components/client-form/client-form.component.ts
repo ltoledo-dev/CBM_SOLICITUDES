@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientModalComponent } from '../client-modal/client-modal.component';
-import { ClientService } from '../../Services/client.service';
-import { Cliente } from '../../Models/clientModel';
+import { ClientService } from '../../Services/Client.service';
+import { Cliente } from '../../Models/ClientModel';
 import { OnInit } from '@angular/core';
 
 @Component({

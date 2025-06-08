@@ -14,7 +14,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ClientService } from '../../Services/client.service';
+import { ClientService } from '../../Services/Client.service';
 import { ClientCreateDto } from '../../Dtos/ClientCreateDto';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
