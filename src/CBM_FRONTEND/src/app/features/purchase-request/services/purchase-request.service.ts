@@ -47,4 +47,9 @@ export class PurchaseRequestService {
   crearSolicitud(solicitud: SolicitudCreateDto): Observable<any> {
     return this.http.post(`${this.apiUrl}/v1/solicitudes`, solicitud);
   }
+
+  eliminarSolicitud(idSolicitudEncabezado: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/v1/solicitudes/${idSolicitudEncabezado}`);
+    console.log(idSolicitudEncabezado);
+  }
 }

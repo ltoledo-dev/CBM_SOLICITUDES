@@ -97,7 +97,19 @@ verDetalle(solicitud: Solicitud) {
     });
   }
 
-  eliminarSolicitud(solicitud: Solicitud) {
-    // Lógica para eliminar la solicitud
+  eliminarSolicitud(idSolicitudEncabezado: number): void {
+    const confirmado = window.confirm('¿Estás seguro de que deseas eliminar esta solicitud?');
+    if (confirmado) {
+      this.purchaseRequestService.eliminarSolicitud(idSolicitudEncabezado).subscribe({
+        next: () => {
+          this.purchaseRequestService.obtenerSolicitudes().subscribe(solicitudes => {
+            this.dataSource.data = solicitudes;
+          });
+        },
+        error: () => {
+          console.log('Error al eliminar la solicitud');
+        }
+      });
+    }
   }
 }
