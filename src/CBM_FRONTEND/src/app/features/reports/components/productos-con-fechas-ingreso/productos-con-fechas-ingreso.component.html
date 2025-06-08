@@ -1,0 +1,43 @@
+<div class="row">
+  <h2>Reporte de productos con fechas de ingreso</h2>
+  <p>Consulta las fechas de ingreso de los productos.</p>
+</div>
+
+<div class="mat-elevation-z8" style="margin-top: 20px;">
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese el valor a buscar" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="full-width-table">
+
+    <!-- Código Producto -->
+    <ng-container matColumnDef="codigoProducto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Código del producto </th>
+      <td mat-cell *matCellDef="let row"> {{row.codigoProducto}} </td>
+    </ng-container>
+
+    <!-- Descripción -->
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+      <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+    </ng-container>
+
+    <!-- Fecha Ingreso -->
+    <ng-container matColumnDef="fechaIngreso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de ingreso </th>
+      <td mat-cell *matCellDef="let row"> {{row.fechaIngreso}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="3">
+        No se encontró información para "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Selector de página"></mat-paginator>
+</div>

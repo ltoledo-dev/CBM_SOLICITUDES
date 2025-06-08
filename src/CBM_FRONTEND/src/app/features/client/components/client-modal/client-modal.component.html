@@ -1,0 +1,46 @@
+<h2 mat-dialog-title style="width: 400px;">Nuevo cliente</h2>
+
+<mat-dialog-content>
+    <form>
+  <mat-form-field style="width:100%;">
+    <mat-label>Código del cliente</mat-label>
+    <input type="text" matInput [formControl]="codeFormControl" [errorStateMatcher]="matcher"
+           placeholder="Ingrese el código del cliente" required>
+
+    @if (codeFormControl.hasError('required')) {
+      <mat-error>El código es<strong> requerido</strong></mat-error>
+    }
+
+
+  </mat-form-field>
+
+    <mat-form-field style="width:100%;">
+
+    <mat-label>Nombre del cliente</mat-label>
+    <input type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher"
+           placeholder="Ingrese el nombre del cliente" required>
+
+    @if (nameFormControl.hasError('required')) {
+      <mat-error>El nombre es<strong> requerido</strong></mat-error>
+    }
+  </mat-form-field>
+</form>
+
+  @if(errorMsg) {
+    <div style="color: red; margin-top: 10px;">
+      {{ errorMsg }}
+    </div>
+  }
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+    <button mat-fab extended mat-dialog-close>
+        <mat-icon>close</mat-icon>
+        Cancelar
+    </button>
+  <button mat-fab extended (click)="guardarCliente()" [disabled]="codeFormControl.invalid || nameFormControl.invalid">
+    <mat-icon>save</mat-icon>
+    Guardar
+  </button>
+</mat-dialog-actions>
