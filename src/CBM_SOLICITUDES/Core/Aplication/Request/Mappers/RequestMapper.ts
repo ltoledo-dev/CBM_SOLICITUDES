@@ -63,21 +63,13 @@ export const mapCreateRequestDTOToModels = (dto: RequestCreateDto) => {
 export const mapUpdateRequestDTOToModels = (dto: RequestUpdateDto) => {
     const header = new RequestHeaderModel({
         idSolicitudEncabezado: dto.idSolicitudEncabezado,
-        codigoSolicitud: dto.codigoSolicitud,
-        fechaCreacion: dto.fechaCreacion,
-        idCliente: dto.idCliente,
+        codigoSolicitud: "0",
+        fechaCreacion: new Date("2000-01-01T00:00:00Z"),
+        idCliente: 0,
         idEstado: dto.idEstado,
-        fechaActualizacion: dto.fechaActualizacion,
-        idUsuario: dto.idUsuario
+        fechaActualizacion: new Date("2000-01-01T00:00:00Z"),
+        idUsuario: 0
     });
 
-    const detalles = dto.detalles.map(d => new RequestDetailModel({
-        idSolicitudDetalle: d.idSolicitudDetalle,
-        idSolicitudEncabezado: dto.idSolicitudEncabezado,
-        idProducto: d.idProducto,
-        cantidad: d.cantidad,
-        costo: d.costo
-    }));
-
-    return { header, detalles };
+    return header ;
 };

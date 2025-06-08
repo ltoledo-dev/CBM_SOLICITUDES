@@ -47,19 +47,7 @@ export default class RequestRepository extends IRequestRepository {
     async updateHeaderRequest(header: RequestHeaderModel): Promise<void> {
         await executeStoredProcedure('solicitud_encabezado_update', [
             { name: 'id_solicitud_encabezado', value: header.idSolicitudEncabezado },
-            { name: 'codigo_solicitud', value: header.codigoSolicitud },
-            { name: 'id_cliente', value: header.idCliente },
             { name: 'id_estado', value: header.idEstado },
-            { name: 'id_usuario', value: header.idUsuario }
-        ]);
-    }
-
-    async updateDetailRequest(detalle: RequestDetailModel): Promise<void> {
-        await executeStoredProcedure('solicitud_detalle_update', [
-            { name: 'id_solicitud_detalle', value: detalle.idSolicitudDetalle },
-            { name: 'id_producto', value: detalle.idProducto },
-            { name: 'cantidad', value: detalle.cantidad },
-            { name: 'costo', value: detalle.costo }
         ]);
     }
 

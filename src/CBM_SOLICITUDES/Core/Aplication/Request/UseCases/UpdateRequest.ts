@@ -10,12 +10,7 @@ export class UpdateRequest {
     }
 
     async execute(dto: RequestUpdateDto) {
-        const { header, detalles } = mapUpdateRequestDTOToModels(dto);
-
+        const header = mapUpdateRequestDTOToModels(dto);
         await this.repository.updateHeaderRequest(header);
-
-        for (const detalle of detalles) {
-            await this.repository.updateDetailRequest(detalle);
-        }
     }
 }
