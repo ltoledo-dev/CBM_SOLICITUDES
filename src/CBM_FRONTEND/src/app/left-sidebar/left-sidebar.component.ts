@@ -44,4 +44,10 @@ export class LeftSidebarComponent {
   closeSidenav(): void {
     this.changeIsLeftSidebarCollapsed.emit(true);
   }
+
+  logout(): void {
+    localStorage.clear();
+    // O solo el token: localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  }
 }

@@ -1,4 +1,5 @@
 <app-left-sidebar
+  *ngIf="mostrarSidebar()"
   [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
   (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)"
 />
