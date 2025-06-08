@@ -11,6 +11,7 @@ import { MatIcon } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { PurchaseRequestDetailComponent } from '../purchase-request-detail/purchase-request-detail.component';
+import {PurchaseRequestAddComponent} from "../purchase-request-add/purchase-request-add.component";
 
 @Component({
   selector: 'app-purchase-request-form',
@@ -65,11 +66,34 @@ export class PurchaseRequestFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  verDetalle(solicitud: Solicitud) {
-    this.dialog.open(PurchaseRequestDetailComponent, {
-      width: '1280px',
-      maxWidth: '100vw',
-      data: { solicitud }
+verDetalle(solicitud: Solicitud) {
+  const dialogRef = this.dialog.open(PurchaseRequestDetailComponent, {
+    width: '1280px',
+    maxWidth: '100vw',
+    data: { solicitud }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.purchaseRequestService.obtenerSolicitudes().subscribe(solicitudes => {
+        this.dataSource.data = solicitudes;
+      });
+    }
+  });
+}
+
+  agregarSolicitud() {
+    const dialogRef = this.dialog.open(PurchaseRequestAddComponent, {
+      width: '1450px',
+      maxWidth: '100vw'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.purchaseRequestService.obtenerSolicitudes().subscribe(solicitudes => {
+          this.dataSource.data = solicitudes;
+        });
+      }
     });
   }
 

@@ -22,8 +22,8 @@ export class PurchaseRequestService {
           codigoSolicitud: dto.codigoSolicitud,
           idEstado: dto.idEstado,
           estado: dto.estado,
-          fechaCreacion: dto.fechaCreacion,
-          fechaActualizacion: dto.fechaActualizacion,
+          fechaCreacion: dto.fechaCreacion.replace('T', ' ').substring(0, 19),
+          fechaActualizacion: dto.fechaActualizacion.replace('T', ' ').substring(0, 19),
           detalles: dto.detalles.map(det => ({
             idSolicitudDetalle: det.idSolicitudDetalle,
             idProducto: det.idProducto,
@@ -36,5 +36,9 @@ export class PurchaseRequestService {
         }))
       )
     );
+  }
+
+  actualizarEstadoSolicitud(dto: { idSolicitudEncabezado: number; idEstado: number }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/v1/solicitudes`, dto);
   }
 }

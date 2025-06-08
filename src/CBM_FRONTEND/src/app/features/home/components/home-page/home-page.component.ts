@@ -12,7 +12,7 @@ export class HomePageComponent {
 
    ngOnInit(): void {
     // Guarda el token en localStorage al iniciar la página (para pruebas)
-    const dummyToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibHRvbGVkbyIsImlhdCI6MTc0OTM0OTk1MCwiZXhwIjoxNzQ5MzUzNTUwfQ.Hv_nt8v8dighTwEbXiHMGA-_HDriUhdCXzyNXiT3Ssc';
+    const dummyToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoibHRvbGVkbyIsImlhdCI6MTc0OTM1MzU3MSwiZXhwIjoxNzQ5MzU3MTcxfQ.U3QToGy7CKTSv8dMyyykTZ4-DbBxM3pQYUzY8lDYI2w';
     localStorage.setItem('authToken', dummyToken);
     console.log('Token guardado en localStorage al iniciar la página');
   }
